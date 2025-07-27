@@ -1,26 +1,37 @@
+import java.util.Arrays;
+
 class Solution {
     public int[] solution(int[] lottos, int[] win_nums) {
-        int[] rank = {6, 6, 5, 4, 3, 2, 1};
-        int maxMatch = 0; // 최고 순위 일치 개수
-        int minMatch = 0; // 최저 순위 일치 개수
+        int[] answer = new int[2];
+        int zeroCount = 0;
+        int matchCount = 0;
 
-        // 0과 일치하는 번호 확인
-        for (int lotto : lottos) {
-            if (lotto == 0) {
-                maxMatch++;
+        Arrays.sort(lottos);
+        Arrays.sort(win_nums);
+
+        for (int i = 0; i < lottos.length; i++) {
+            if (lottos[i] == 0) {
+                zeroCount++;
                 continue;
             }
-            for (int win_num : win_nums) {
-                if (lotto == win_num) {
-                    maxMatch++;
-                    minMatch++;
-                    break;
+            for (int j = 0; j < win_nums.length; j++) {
+                if (lottos[i] == win_nums[j]) {
+                    matchCount++;
+                    break; // 중복 방지
                 }
             }
         }
 
-        // 순위 계산
-        int[] answer = {rank[maxMatch], rank[minMatch]};
+        int max = matchCount + zeroCount;
+        int min = matchCount;
+
+        answer[0] = getRank(max);
+        answer[1] = getRank(min);
+
         return answer;
+    }
+
+    private int getRank(int count) {
+        return count >= 2 ? 7 - count : 6;
     }
 }
