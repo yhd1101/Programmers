@@ -1,22 +1,18 @@
+import java.util.*;
+
 class Solution {
     public String solution(String s) {
         String answer = "";
-        String c = "";
-        String e= "";
-         char[] a = new char[s.length()];
 
-        for (int i = 0; i < s.length(); i++) {
-            a[i] = s.charAt(i);
-        }
-        if (a.length % 2 != 0) {
-            e = String.valueOf(a[a.length / 2]);
+        String[] str = s.split("");  // 한 글자씩 배열로
+        int x = s.length() / 2;
+
+        if (s.length() % 2 == 0) {
+            answer = str[x-1] + str[x]; 
         } else {
-
-            e= String.valueOf(a[a.length/2-1]);
-            c= String.valueOf(a[a.length/2]);
-            e = e+c;
+            answer = str[x];   // 여기 수정
         }
         
-        return e; 
+        return answer;
     }
 }
