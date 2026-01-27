@@ -1,22 +1,21 @@
-import java.util.*;
 class Solution {
     public boolean solution(int x) {
         boolean answer = true;
-       int a = x;
-        List<Integer> list = new ArrayList<>();
+        int original = x;  // 원래 숫자 저장
         int sum = 0;
-        while( a> 0) {
-            list.add(a %10);
-            a= a/10;
+
+        while (x > 0) {
+            int digit = x % 10;  // 한 자리 숫자 꺼냄
+            sum += digit;       // 바로 더함
+            x /= 10;            // 마지막 자리 제거
         }
-        for(int i =0; i< list.size(); i++) {
-            sum = sum + list.get(i);
-        }
-        if ( x % sum ==0) {
-            return answer;
+
+        if ( original % sum == 0) {
+            answer = true;
         } else {
             answer = false;
-            return answer;
         }
+        
+        return answer;
     }
 }
